@@ -52,24 +52,48 @@ public class Drone {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getSerialNumber() {
         return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
     }
 
     public Model getModel() {
         return model;
     }
 
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
     public Integer getWeightLimit() {
         return weightLimit;
+    }
+
+    public void setWeightLimit(Integer weightLimit) {
+        this.weightLimit = weightLimit;
     }
 
     public Integer getBatteryPercentage() {
         return batteryPercentage;
     }
 
+    public void setBatteryPercentage(Integer batteryPercentage) {
+        this.batteryPercentage = batteryPercentage;
+    }
+
     public State getState() {
         return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
     }
 
     @Override
