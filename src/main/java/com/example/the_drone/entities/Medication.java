@@ -1,9 +1,12 @@
 package com.example.the_drone.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -12,17 +15,21 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
-@Table
+@Table(name = "medication")
 public class Medication {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "weight")
     private Integer weight;
+    @Column(name = "code")
     private String code;
     @Lob
     private byte[] image;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "drone_id", referencedColumnName = "id")
     private Drone drone;
 
     public Medication() {

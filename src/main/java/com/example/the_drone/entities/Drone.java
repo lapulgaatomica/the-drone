@@ -2,29 +2,41 @@ package com.example.the_drone.entities;
 
 import com.example.the_drone.enums.Model;
 import com.example.the_drone.enums.State;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table
+@Table(name = "drone")
 public class Drone {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+    @Column(name = "serial_number", unique = true)
     private String serialNumber;
+    @Column(name = "model")
     @Enumerated(EnumType.STRING)
     private Model model;
+    @Column(name = "weight_limit")
     private Integer weightLimit;
+    @Column(name = "battery_percentage")
     private Integer batteryPercentage;
+    @Column(name = "state")
     @Enumerated(EnumType.STRING)
     private State state;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "drone")
+    private List<Medication> medications;
 
     public Drone() {
     }
@@ -94,6 +106,14 @@ public class Drone {
 
     public void setState(State state) {
         this.state = state;
+    }
+
+    public List<Medication> getMedications() {
+        return medications;
+    }
+
+    public void setMedications(List<Medication> medications) {
+        this.medications = medications;
     }
 
     @Override
